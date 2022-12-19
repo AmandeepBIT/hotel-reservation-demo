@@ -90,6 +90,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
    */
   filterData(filterValue: FilterModal) {
     console.log(filterValue)
+    console.log(this.dataSource.data)
     if (filterValue.startDate && filterValue.endDate) {
       this.dataSource.filterPredicate = (data) => {
         return (
