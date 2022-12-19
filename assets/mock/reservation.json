@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "stay": {
+      "arrivalDate": "2022-12-18T05:00:00.000Z",
+      "departureDate": "2022-12-25T05:00:00.000Z"
+    },
+    "room": {
+      "roomSize": "business-suite",
+      "roomQuantity": 3
+    },
+    "firstName": "IDM-3",
+    "lastName": "ENG",
+    "email": "idm.test@idm.com",
+    "phone": "9999999999",
+    "addressStreet": {
+      "streetName": "IDM Street",
+      "streetNumber": "1234"
+    },
+    "addressLocation": {
+      "zipCode": "123456",
+      "state": "Arizona",
+      "city": "OAKVILLE"
+    },
+    "extras": [
+      "extraBreakfast",
+      "extraTV",
+      "extraWiFi",
+      "extraParking",
+      "extraBalcony"
+    ],
+    "payment": "cc",
+    "note": "idm lab test",
+    "tags": [
+      "hotel",
+      "booking",
+      "labtest"
+    ],
+    "reminder": true,
+    "newsletter": true,
+    "confirm": false
+  },
+  {
+    "id": 2,
+    "stay": {
+      "arrivalDate": "2022-12-13T18:30:00.000Z",
+      "departureDate": "2022-12-31T18:30:00.000Z"
+    },
+    "room": {
+      "roomSize": "0",
+      "roomQuantity": 4
+    },
+    "firstName": "2000",
+    "lastName": "test@test.com",
+    "email": "+93 Afghanistan",
+    "phone": "Germany",
+    "addressStreet": {
+      "streetName": "Germany",
+      "streetNumber": "Slovakia"
+    },
+    "addressLocation": {
+      "city": "176000",
+      "state": "sdgsghe",
+      "zipCode": "swgr"
+    },
+    "extras": ["steak-0"],
+    "payment": "1",
+    "note": "",
+    "tags": [],
+    "reminder": true,
+    "newsletter": true,
+    "confirm": true
+  }
+]
