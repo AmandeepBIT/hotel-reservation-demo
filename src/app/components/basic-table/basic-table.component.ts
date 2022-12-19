@@ -89,6 +89,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     Apply the filters over multiple columns 
    */
   filterData(filterValue: FilterModal) {
+    console.log(filterValue)
     if (filterValue.startDate && filterValue.endDate) {
       this.dataSource.filterPredicate = (data) => {
         return (
