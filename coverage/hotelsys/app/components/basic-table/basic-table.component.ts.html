@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.46% </span>
+                <span class="strong">57.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>33/52</span>
+                <span class='fraction'>30/52</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">13.15% </span>
+                <span class="strong">10.52% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/38</span>
+                <span class='fraction'>4/38</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.35% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>14/17</span>
+                <span class='fraction'>12/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">63.46% </span>
+                <span class="strong">57.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>33/52</span>
+                <span class='fraction'>30/52</span>
             </div>
         
             
@@ -231,9 +231,7 @@
 <a name='L166'></a><a href='#L166'>166</a>
 <a name='L167'></a><a href='#L167'>167</a>
 <a name='L168'></a><a href='#L168'>168</a>
-<a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a>
-<a name='L171'></a><a href='#L171'>171</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L169'></a><a href='#L169'>169</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -271,7 +269,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -280,7 +278,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -289,8 +287,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -299,8 +295,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -333,6 +328,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -415,7 +411,7 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 import { Constants } from 'src/app/utils/constants/constants';
 import { CRUDPeriodicModal, PeriodicElement } from 'src/app/utils/interfaces/periodic-table.interface';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-import { Subscription } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { FilterModal } from 'src/app/utils/interfaces/filterData.interface';
 import { PerodicModes } from 'src/app/utils/enum/enum';
 &nbsp;
@@ -439,9 +435,9 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef&lt;DialogBoxComponent&gt;
   ) { }
 &nbsp;
-  ngOnInit(): void {
-    this.setupFilter();
+  ngOnInit(): void {    
     this.getReservationData();
+    
   }
 &nbsp;
   /* 
@@ -449,28 +445,25 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     This will help to remove all the event listeners of particular component 
   */
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.subscription) {
+<span class="cstat-no" title="statement not covered" >      this.subscription.unsubscribe();</span>
     }
   }
 &nbsp;
   /* 
     Load pre-defined data from the reservation.json file  
   */
-  getReservationData() {
-    this.subscription = this.reservationService
-      .getReservationData()
-      .subscribe((res) =&gt; {
-        (res) ? (this.dataSource.data = res) : <span class="branch-1 cbranch-no" title="branch not covered" >this.toaster.error(Constants.ERROR)</span>
-      });
+ async getReservationData() {    
+    const res = this.subscription = await lastValueFrom(this.reservationService.getReservationData());
+    (res) ? (this.dataSource.data = res) : <span class="branch-1 cbranch-no" title="branch not covered" >this.toaster.error(Constants.ERROR)</span>
   }
 &nbsp;
   /* 
     Filter predicates applied over datasource
     so we can apply the filter functionalities over selected columns
   */
-    setupFilter() {
-      this.dataSource.filterPredicate = <span class="fstat-no" title="function not covered" >(d</span>: PeriodicElement, filter: string) =&gt; {
+<span class="fstat-no" title="function not covered" >    setupFilter(</span>) {
+<span class="cstat-no" title="statement not covered" >      this.dataSource.filterPredicate = <span class="fstat-no" title="function not covered" >(d</span>: PeriodicElement, filter: string) =&gt; {</span>
         const fName = <span class="cstat-no" title="statement not covered" >d.firstName &amp;&amp; d.firstName.trim().toLowerCase() || '';</span>
         const lName = <span class="cstat-no" title="statement not covered" >d.lastName &amp;&amp; d.lastName.trim().toLowerCase() || '';</span>
         const city = <span class="cstat-no" title="statement not covered" >d.addressLocation.city &amp;&amp; d.addressLocation.city.trim().toLowerCase() || '';</span>
@@ -493,7 +486,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     Get the filter values from the modal then
     Apply the filters over multiple columns 
    */
-<span class="fstat-no" title="function not covered" >  filterData(</span>filterValue: FilterModal) {
+<span class="fstat-no" title="function not covered" >  filterData(</span>filterValue: FilterModal) {    
 <span class="cstat-no" title="statement not covered" >    if (filterValue.startDate &amp;&amp; filterValue.endDate) {</span>
 <span class="cstat-no" title="statement not covered" >      this.dataSource.filterPredicate = <span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return (</span>
@@ -503,6 +496,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
       };
 <span class="cstat-no" title="statement not covered" >      this.dataSource.filter = '' + Math.random();</span>
     } else {
+<span class="cstat-no" title="statement not covered" >      this.setupFilter();</span>
 <span class="cstat-no" title="statement not covered" >      this.dataSource.filter = filterValue.searchedText.trim().toLowerCase();</span>
     }
   }
@@ -566,7 +560,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     var val;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (val = (this.getIndex(id))) {
       var oldData = <span class="cstat-no" title="statement not covered" >this.dataSource.data</span>
-<span class="cstat-no" title="statement not covered" >      oldData.splice(this.getIndex(id), 1);</span>
+<span class="cstat-no" title="statement not covered" >      oldData.splice(val, 1);</span>
 <span class="cstat-no" title="statement not covered" >      this.dataSource.data = oldData</span>
 <span class="cstat-no" title="statement not covered" >      return true</span>
     }
@@ -580,7 +574,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-19T01:12:09.117Z
+                at 2022-12-19T20:42:51.221Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -10,7 +10,7 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 import { Constants } from 'src/app/utils/constants/constants';
 import { CRUDPeriodicModal, PeriodicElement } from 'src/app/utils/interfaces/periodic-table.interface';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-import { Subscription } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { FilterModal } from 'src/app/utils/interfaces/filterData.interface';
 import { PerodicModes } from 'src/app/utils/enum/enum';
 
@@ -34,9 +34,9 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<DialogBoxComponent>
   ) { }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {    
     this.getReservationData();
+    
   }
 
   /* 
@@ -52,12 +52,9 @@ export class BasicTableComponent implements OnInit, OnDestroy {
   /* 
     Load pre-defined data from the reservation.json file  
   */
-  getReservationData() {
-    this.subscription = this.reservationService
-      .getReservationData()
-      .subscribe((res) => {
-        (res) ? (this.dataSource.data = res) : this.toaster.error(Constants.ERROR)
-      });
+ async getReservationData() {    
+    const res = this.subscription = await lastValueFrom(this.reservationService.getReservationData());
+    (res) ? (this.dataSource.data = res) : this.toaster.error(Constants.ERROR)
   }
 
   /* 
