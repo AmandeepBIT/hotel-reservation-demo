@@ -88,9 +88,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     Get the filter values from the modal then
     Apply the filters over multiple columns 
    */
-  filterData(filterValue: FilterModal) {
-    console.log(filterValue)
-    console.log(this.dataSource.data)
+  filterData(filterValue: FilterModal) {    
     if (filterValue.startDate && filterValue.endDate) {
       this.dataSource.filterPredicate = (data) => {
         return (
