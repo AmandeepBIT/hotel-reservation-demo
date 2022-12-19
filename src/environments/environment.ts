@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'src/assets/mock/reservation.json'  
+  apiUrl: 'assets/mock/reservation.json'  
 };
 
 /*

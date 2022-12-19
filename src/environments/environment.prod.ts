@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'src/assets/mock/reservation.json'  
+  apiUrl: 'assets/mock/reservation.json'  
 };
