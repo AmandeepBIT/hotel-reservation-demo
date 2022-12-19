@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --watch=true --source-map=false",
+    "test": "ng test",
     "build:ci": "ng build --base-href /hotel-reservation-demo/",
     "coverage": "ng test --code-coverage",
     "lint": "ng lint",
