@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="content-form">
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label>Search By Name, Address & Location</mat-label>
+        <input
+          matInput
+          #filterField
+          (input)="applyFilter($event)"
+          [(ngModel)]="FILTERED_DATA.searchedText"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label>Search By Arrival Date</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+          <input
+            matStartDate
+            formControlName="start"
+            readonly
+          />
+          <input
+            readonly
+            matEndDate
+            formControlName="end"            
+            (dateChange)="applyDateFilter()"
+          />
+        </mat-date-range-input>
+        <mat-datepicker-toggle
+          class="datePickerSec"
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')"
+          >Invalid start date</mat-error
+        >
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')"
+          >Invalid end date</mat-error
+        >
+      </mat-form-field>
+    </div>
+      <button mat-button color="primary" (click)="clearFilter()" *ngIf="range.value.end">Clear Filter</button>
+  </div>
+</div>

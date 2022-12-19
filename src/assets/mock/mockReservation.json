@@ -1,0 +1,41 @@
+{
+  "id": 1,
+  "stay": {
+    "arrivalDate": "2022-12-18T05:00:00.000Z",
+    "departureDate": "2022-12-25T05:00:00.000Z"
+  },
+  "room": {
+    "roomSize": "business-suite",
+    "roomQuantity": 3
+  },
+  "firstName": "IDM-3",
+  "lastName": "ENG",
+  "email": "idm.test@idm.com",
+  "phone": "9999999999",
+  "addressStreet": {
+    "streetName": "IDM Street",
+    "streetNumber": "1234"
+  },
+  "addressLocation": {
+    "zipCode": "123456",
+    "state": "Arizona",
+    "city": "OAKVILLE"
+  },
+  "extras": [
+    "extraBreakfast",
+    "extraTV",
+    "extraWiFi",
+    "extraParking",
+    "extraBalcony"
+  ],
+  "payment": "cc",
+  "note": "idm lab test",
+  "tags": [
+    "hotel",
+    "booking",
+    "labtest"
+  ],
+  "reminder": true,
+  "newsletter": true,
+  "confirm": false
+}

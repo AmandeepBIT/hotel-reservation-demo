@@ -1,0 +1,85 @@
+<div class="container-body">
+  <div class="row">
+    <app-filter (filterData)="filterData($event)"></app-filter>
+    <button
+      align="end"
+      mat-raised-button
+      color="accent"
+      (click)="createReservation()"
+    >
+      Create New Reservation
+    </button>
+  </div>
+  <div class="table-data">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td class="row-width" mat-cell *matCellDef="let element">
+          {{ element?.firstName }} {{ element?.lastName }}
+        </td>
+      </ng-container>
+      <!-- Address Column -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td class="row-width" mat-cell *matCellDef="let element">
+          {{ element?.addressStreet?.streetName }},
+          {{ element?.addressStreet?.streetNumber }}
+        </td>
+      </ng-container>
+      <!-- Location Column -->
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef>Location</th>
+        <td class="row-width" mat-cell *matCellDef="let element">
+          {{ element?.addressLocation?.city }},
+          {{ element?.addressLocation?.state }},
+          {{ element?.addressLocation?.zipCode }}
+        </td>
+      </ng-container>
+      <!-- Arrival Column -->
+      <ng-container matColumnDef="arrival">
+        <th mat-header-cell *matHeaderCellDef>Arrival</th>
+        <td
+          class="row-width"
+          mat-cell
+          *matCellDef="let element"
+          [ngClass]="element.stay.arrivalDate ? '' : 'noData'"
+        >
+          {{ element?.stay?.arrivalDate | date : "dd/MM/yyyy" || "-" }}
+        </td>
+      </ng-container>
+      <!-- Departure Column -->
+      <ng-container matColumnDef="departure">
+        <th mat-header-cell *matHeaderCellDef>Departure</th>
+        <td
+          class="row-width"
+          mat-cell
+          *matCellDef="let element"
+          [ngClass]="element.stay.departureDate ? '' : 'noData'"
+        >
+          {{ element?.stay?.departureDate | date : "dd/MM/yyyy" || "-" }}
+        </td>
+      </ng-container>
+      <!-- Edit Column -->
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edit</th>
+        <td class="row-edit-width" mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="updateReservation(element)">
+            <mat-icon class="edit-icon">edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Delete</th>
+        <td class="row-delete-width" mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="onDeleteClick(element.id)">
+            <mat-icon class="delete-icon">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+.container {
+  margin: 0;
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box;
+
+  .row-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+
+    .form-group {
+      padding-left: 10px;
+      padding-right: 15px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+
+    .form-group {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
+
+      .example-chip-list {
+        width: 100%;
+      }
+
+      mat-radio-group {
+        margin-left: -11px;
+
+        mat-radio-button {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+
+  .form-group-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  button {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    .row {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    mat-checkbox-label {
+      flex-wrap: wrap;
+    }
+  }
+
+  mat-radio-button {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  mat-option {
+    width:auto
+  }
+}

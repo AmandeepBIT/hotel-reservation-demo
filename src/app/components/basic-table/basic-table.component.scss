@@ -1,0 +1,109 @@
+table {
+  width: 100%;
+  margin-bottom: 2em;
+.row-width{
+  width: 280px;
+}
+.row-delete-width{
+  width: 150px;
+}
+.row-edit-width{
+  width: 150px;
+}
+  th {
+    &.mat-header-cell {
+      &.cdk-header-cell {
+        &.cdk-column-delete {
+          &.mat-column-delete {
+            width: 20px;
+          }
+        }
+      }
+    }
+  }
+  .edit-icon {
+    color: var(--blue);
+    margin-left: -10px;
+  }
+
+  .delete-icon {
+    color: var(--red);
+  }
+
+  .noData {
+    padding-left: 25px;
+  }
+}
+
+mat-form-field {
+  margin-top: 12px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  float: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  .content-form {
+    display: flex;
+    align-items: center;
+  }
+
+  .form-group {
+    padding-left: 10px;
+    padding-right: 20px;  
+  }
+  .form-New-group {
+    justify-content: flex-end;
+  }
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 240px !important;
+}
+
+@media screen and (min-width: 320px) and (max-width: 624px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: flex-start;
+
+  }
+  .table-data {
+    width: auto;
+    overflow-x: scroll;
+    height: auto;
+    padding: 10px;
+  }
+  .mat-elevation-z8 {
+    width: 500px;
+  }
+}
+
+@media screen and (min-width: 625px) and (max-width: 768px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: flex-start;
+  }
+  .table-data {
+    overflow-x: scroll;
+    width: 600px;
+    height: auto;
+    padding: 30px;
+  }
+  .mat-elevation-z8 {
+    width: 800px;
+  }
+}

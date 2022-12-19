@@ -1,0 +1,167 @@
+<div class="container">
+  <div class="row-display">
+    <mat-icon (click)="closePopup()">close</mat-icon>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <div class="form-Data">
+      <div class="row" formGroupName="stay">
+        <div class="form-group">
+          <mat-form-field>
+            <input matInput  readonly [matDatepicker]="picker" placeholder="Date of Arrival" formControlName="arrivalDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <input matInput readonly [matDatepicker]="picker2" placeholder="Date of Departure" formControlName="departureDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" formGroupName="room">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Room Size</mat-label>
+            <mat-select formControlName="roomSize">
+              <mat-option *ngFor="let room of Rooms" [value]="room.value">
+                {{ room.viewValue }}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Choose a room type</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Room Quantity</mat-label>
+            <input matInput placeholder="Quantity" formControlName="roomQuantity" />
+            <mat-hint>Maximum:5</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="column">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>First name</mat-label>
+            <input matInput placeholder="first Name" formControlName="firstName" minlength="3" maxlength="25" />
+            <mat-hint align="end">3/25</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Last name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="lastName" minlength="3" maxlength="50" />
+            <mat-hint align="end">3/50</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input type="email" matInput placeholder="Ex. mailto:pat@example.com" formControlName="email" />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Phone Number</mat-label>
+            <input type="tel" matInput placeholder="+91 5646234567" formControlName="phone" />
+            <mat-hint>Add your country code first</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" formGroupName="addressStreet">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Street Name</mat-label>
+            <input matInput placeholder="Street Name" formControlName="streetName" />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Street Number</mat-label>
+            <input matInput placeholder="Street Number" formControlName="streetNumber" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" formGroupName="addressLocation">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Zip</mat-label>
+            <input matInput placeholder="Enter Zip" formControlName="zipCode" />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>State</mat-label>
+            <input matInput placeholder="State" formControlName="state" />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <input matInput placeholder="City" formControlName="city" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="column">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Extras</mat-label>
+            <mat-select formControlName="extras" multiple>
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{ food.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-radio-group aria-label="Select an option" formControlName="payment">
+            <mat-radio-button value="1">Credit Card</mat-radio-button>
+            <mat-radio-button value="2">PayPal</mat-radio-button>
+            <mat-radio-button value="3">Cash</mat-radio-button>
+            <mat-radio-button value="4">Bitcoin</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Personal Note</mat-label>
+            <textarea matInput formControlName="note"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="example-chip-list">
+            <mat-label>Tags</mat-label>
+            <mat-chip-list #chipList formArrayName="tags">
+              <mat-chip *ngFor="let item of tags; index as i" (removed)="removeTags(item)">
+                {{ item }}
+                <button matChipRemove [attr.aria-label]="'remove ' + item">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]=true (matChipInputTokenEnd)="addTags($event)" />
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-slide-toggle formControlName="reminder">Send me a reminder</mat-slide-toggle>
+        </div>
+        <div class="form-group">
+          <mat-slide-toggle formControlName="newsletter">Subscribe to newsletter</mat-slide-toggle>
+        </div>
+        <div class="form-group">
+          <mat-checkbox formControlName="confirm">I confirm the information given above</mat-checkbox>
+        </div>
+      </div>
+      <div class="form-group-button">
+        <button mat-raised-button color="accent" type="submit" [disabled]="!form.valid">
+          Submit
+        </button>
+        <button mat-raised-button color="primary" type="button" (click)="closePopup()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
