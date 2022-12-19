@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'http://localhost:3000/data',
-  // apiUrl: 'https://my-json-server.typicode.com/AmandeepBIT/hotelsys-demo/data'
-  apiUrl: '/assets/mock/reservation.json'  
+  apiUrl: 'src/assets/mock/reservation.json'  
 };
 
 /*
