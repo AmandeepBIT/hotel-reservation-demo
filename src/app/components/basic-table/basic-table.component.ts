@@ -35,7 +35,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.setupFilter();
+    
     this.getReservationData();
   }
 
@@ -98,6 +98,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
       };
       this.dataSource.filter = '' + Math.random();
     } else {
+      this.setupFilter();
       this.dataSource.filter = filterValue.searchedText.trim().toLowerCase();
     }
   }
@@ -161,7 +162,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     var val;
     if (val = (this.getIndex(id))) {
       var oldData = this.dataSource.data
-      oldData.splice(this.getIndex(id), 1);
+      oldData.splice(val, 1);
       this.dataSource.data = oldData
       return true
     }
