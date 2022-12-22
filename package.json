@@ -1,16 +1,20 @@
 {
   "name": "hotelsys",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:dev": "electron dist/hotelsys/shell.js",
+    "start:prod": "electron dist/hotelsys/main.js",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build:dev": "concurrently \"ng build -c=electron --delete-output-path=false --watch\" \"webpack --config webpack.electron.dev.config.js --watch\"",
+    "build:prod": "ng build -c=electron && webpack --config webpack.electron.prod.config.js",
     "test": "ng test",
-    "build:ci": "ng build --base-href /hotel-reservation-demo/",
-    "coverage": "ng test --code-coverage",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "prepackage": "cd dist/hotelsys && npm install",
+    "package": "electron-packager dist/hotelsys --out=dist --asar",
+    "analyze": "npx @doyensec/electronegativity -i src/electron"
   },
   "private": true,
   "dependencies": {
@@ -22,9 +26,13 @@
     "@angular/forms": "^14.2.0",
     "@angular/material": "^13.0.0",
     "@angular/platform-browser": "^14.2.0",
+    "electron-log": "4.4.1",
+    "ngx-electronyzer": "1.0.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "ngx-toastr": "^14.3.0",
+    "node-polyfill-webpack-plugin": "^2.0.1",
+    "path-browserify": "^1.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -41,13 +49,22 @@
     "@types/jasmine": "~4.0.0",
     "@typescript-eslint/eslint-plugin": "5.43.0",
     "@typescript-eslint/parser": "5.43.0",
+    "electron": "^22.0.0",
+    "electron-packager": "^17.1.1",
     "eslint": "^8.28.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
+    "ts-loader": "^9.2.5",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "typescript": "~4.7.2"
-  }
+    "typescript": "~4.7.2",
+    "concurrently": "^6.2.1",
+    "webpack-cli": "^4.10.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "browserslist": [
+    "chrome 100"
+  ]
 }

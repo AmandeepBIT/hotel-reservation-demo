@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'assets/mock/reservation.json'  
+  desktop: false,
+  apiUrl: 'assets/mock/reservation.json'
 };

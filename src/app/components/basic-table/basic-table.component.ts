@@ -1,7 +1,6 @@
 import {
   Component,
-  OnInit,
-  OnDestroy,
+  OnInit  
 } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,7 +9,6 @@ import { ReservationsService } from 'src/app/services/reservations.service';
 import { Constants } from 'src/app/utils/constants/constants';
 import { CRUDPeriodicModal, PeriodicElement } from 'src/app/utils/interfaces/periodic-table.interface';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-import { lastValueFrom, Subscription } from 'rxjs';
 import { FilterModal } from 'src/app/utils/interfaces/filterData.interface';
 import { PerodicModes } from 'src/app/utils/enum/enum';
 
@@ -21,11 +19,9 @@ const ELEMENT_DATA: PeriodicElement[] = [];
   templateUrl: './basic-table.component.html',
   styleUrls: ['./basic-table.component.scss'],
 })
-export class BasicTableComponent implements OnInit, OnDestroy {
+export class BasicTableComponent implements OnInit {
   displayedColumns: string[] = Constants.DISPLAYED_COLUMNS;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-
-  public subscription!: Subscription;
 
   constructor(
     public reservationService: ReservationsService,
@@ -34,26 +30,15 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<DialogBoxComponent>
   ) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.getReservationData();
-    
-  }
-
-  /* 
-    Destory the subscription
-    This will help to remove all the event listeners of particular component 
-  */
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 
   /* 
     Load pre-defined data from the reservation.json file  
   */
- async getReservationData() {    
-    const res = this.subscription = await lastValueFrom(this.reservationService.getReservationData());
+  async getReservationData() {
+    const res = await this.reservationService.getReservationData();
     (res) ? (this.dataSource.data = res) : this.toaster.error(Constants.ERROR)
   }
 
@@ -61,17 +46,17 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     Filter predicates applied over datasource
     so we can apply the filter functionalities over selected columns
   */
-    setupFilter() {
-      this.dataSource.filterPredicate = (d: PeriodicElement, filter: string) => {
-        const fName = d.firstName && d.firstName.trim().toLowerCase() || '';
-        const lName = d.lastName && d.lastName.trim().toLowerCase() || '';
-        const city = d.addressLocation.city && d.addressLocation.city.trim().toLowerCase() || '';
-        const state = d.addressLocation.state && d.addressLocation.state.trim().toLowerCase() || '';
-        const zipcode = d.addressLocation.zipCode && d.addressLocation.zipCode.trim().toLowerCase() || '';
-        return (fName.indexOf(filter) !== -1 || lName.indexOf(filter) !== -1 || city.indexOf(filter) !== -1 ||
-          state.indexOf(filter) !== -1 || zipcode.indexOf(filter) !== -1)
-      };
-    }
+  setupFilter() {
+    this.dataSource.filterPredicate = (d: PeriodicElement, filter: string) => {
+      const fName = d.firstName && d.firstName.trim().toLowerCase() || '';
+      const lName = d.lastName && d.lastName.trim().toLowerCase() || '';
+      const city = d.addressLocation.city && d.addressLocation.city.trim().toLowerCase() || '';
+      const state = d.addressLocation.state && d.addressLocation.state.trim().toLowerCase() || '';
+      const zipcode = d.addressLocation.zipCode && d.addressLocation.zipCode.trim().toLowerCase() || '';
+      return (fName.indexOf(filter) !== -1 || lName.indexOf(filter) !== -1 || city.indexOf(filter) !== -1 ||
+        state.indexOf(filter) !== -1 || zipcode.indexOf(filter) !== -1)
+    };
+  }
   /* 
      Get the index based on the ID, so we can update / delete the exact element    
    */
@@ -85,7 +70,7 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     Get the filter values from the modal then
     Apply the filters over multiple columns 
    */
-  filterData(filterValue: FilterModal) {    
+  filterData(filterValue: FilterModal) {
     if (filterValue.startDate && filterValue.endDate) {
       this.dataSource.filterPredicate = (data) => {
         return (
@@ -138,31 +123,23 @@ export class BasicTableComponent implements OnInit, OnDestroy {
     if (res) {
       switch (res.mode) {
         case PerodicModes.CREATE:
-          var oldData = this.dataSource.data
-          oldData.push(res.modal)
-          this.dataSource.data = this.dataSource.data
+          this.reservationService.createReservation(res.modal)
           break
         case PerodicModes.UPDATE:
-          var oldData = this.dataSource.data
-          oldData[this.getIndex(res.modal?.id)] = res.modal
-          this.dataSource.data = oldData
+          this.reservationService.updateReservation(res.modal)
           break
-        default: break;
+          default: break;
+        }
       }
-    }
+    this.getReservationData();
     return this.dataSource.data
   }
+
   /* 
    Perform this method when user wants to delete the particular element    
   */
-  onDeleteClick(id: number) {
-    var val;
-    if (val = (this.getIndex(id))) {
-      var oldData = this.dataSource.data
-      oldData.splice(val, 1);
-      this.dataSource.data = oldData
-      return true
-    }
-    return false
+  onDeleteClick(item: PeriodicElement) {
+    this.reservationService.deleteReservation(item)
+    this.getReservationData();
   }
 }

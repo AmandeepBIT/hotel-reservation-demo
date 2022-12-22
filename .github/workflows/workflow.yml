@@ -1,30 +1,30 @@
-name: Hotel Sys Deploy
+# name: Hotel Sys Deploy
 
-on:
-  push:
-    branches:
-      - "main"
+# on:
+#   push:
+#     branches:
+#       - "main"
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.17]
+#     strategy:
+#       matrix:
+#         node-version: [14.17]
     
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
 
-      - name: Install and Check linting
-        run: npm install && npm ci && npm run lint
+#       - name: Install and Check linting
+#         run: npm install && npm ci && npm run lint
         
-      - name: Build
-        run: npm run build:ci && cp dist/hotelsys/index.html dist/hotelsys/404.html
+#       - name: Build
+#         run: npm run build:ci && cp dist/hotelsys/index.html dist/hotelsys/404.html
       
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.1
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: dist/hotelsys # The folder the action should deploy.   
+#       - name: Deploy
+#         uses: JamesIves/github-pages-deploy-action@4.1.1
+#         with:
+#           branch: gh-pages # The branch the action should deploy to.
+#           folder: dist/hotelsys # The folder the action should deploy.   

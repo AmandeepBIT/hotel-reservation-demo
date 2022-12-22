@@ -5,7 +5,7 @@ export class Constants {
   public static ERROR = 'Error';
   /***************************** FOR NUMBERS **************************/
   public static HEIGHT = '70%';
-  public static WIDTH = '50%';
+  public static WIDTH = '70%';
 
   /************************ FOR ARRAY VALUES ************************** */
   public static DISPLAYED_COLUMNS: string[] = [

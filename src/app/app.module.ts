@@ -11,6 +11,8 @@ import { FilterComponent } from './components/filter/filter.component';
 import { DialogBoxComponent } from './components/dialog-box/dialog-box.component';
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from './components/header/header.component';
+import { ElectronService } from 'ngx-electronyzer';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HeaderComponent } from './components/header/header.component';
     MaterialModule,
     ToastrModule.forRoot(),
   ],
-  providers: [HttpClient],
+  
+  providers: [HttpClient, ElectronService],
+  
   bootstrap: [AppComponent],
 })
 export class AppModule { }

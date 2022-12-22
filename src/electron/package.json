@@ -1,0 +1,12 @@
+{
+    "name": "hotelsys",
+    "description": "Hotel Reservation System",
+    "version": "1.0.0",
+    "author": {
+      "name": "Amandeep S"
+    },
+    "main": "main.js",
+    "dependencies": {
+      "electron-log": "4.3.1"
+    }
+}
